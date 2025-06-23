@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>הערכת שכר דירה</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Heebo', sans-serif;
+      background-color: #f2f2f2;
+      direction: rtl;
+      padding: 40px;
+    }
+    .form-container {
+      background-color: #ffffff;
+      padding: 30px;
+      max-width: 750px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input[type="text"], input[type="number"], select, input[type="range"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    input.error, select.error {
+      border-color: red;
+      background-color: #ffe5e5;
+    }
+    .error-message {
+      color: red;
+      font-size: 0.9em;
+      display: none;
+      margin-bottom: 10px;
+    }
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #00aaff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #0077cc;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>הערכת שכר דירה</h1>
+    <form id="rentalForm" action="{{ url_for('predict') }}" method="post" novalidate>
+
+      <label>שכונה:</label>
+      <select name="neighborhood" required>
+<option value="">בחר שכונה</option>
+<option value="בית שטראוס">בית שטראוס</option>
+<option value="נוה ברבור">נוה ברבור</option>
+<option value="נוה אביבים">נוה אביבים</option>
+<option value="מע"ר צפוני">מע"ר צפוני</option>
+<option value="רמת אביב ג">רמת אביב ג</option>
+<option value="עג'מי">עג'מי</option>
+<option value="שבזי">שבזי</option>
+<option value="שיכון בבלי">שיכון בבלי</option>
+<option value="מונטיפיורי">מונטיפיורי</option>
+<option value="מרכז יפו מערבית לשדרות ירושלים">מרכז יפו מערבית לשדרות ירושלים</option>
+<option value="נוה שרת">נוה שרת</option>
+<option value="נוה חן">נוה חן</option>
+<option value="תל כביר">תל כביר</option>
+<option value="ביצרון">ביצרון</option>
+<option value="נוה אליעזר">נוה אליעזר</option>
+<option value="נחלת יצחק">נחלת יצחק</option>
+<option value="גבעת הרצל">גבעת הרצל</option>
+<option value="עזרא">עזרא</option>
+<option value="רביבים">רביבים</option>
+<option value="גני צהלה">גני צהלה</option>
+<option value="לבנה">לבנה</option>
+<option value="לינקולן">לינקולן</option>
+<option value="נאות אפקה א">נאות אפקה א</option>
+<option value="תוכנית ל">תוכנית ל</option>
+<option value="המשתלה">המשתלה</option>
+<option value="הצפון הישן החלק המרכזי">הצפון הישן החלק המרכזי</option>
+<option value="לב תל אביב החלק הצפוני">לב תל אביב החלק הצפוני</option>
+<option value="הצפון החדש החלק הדרומי">הצפון החדש החלק הדרומי</option>
+<option value="הצפון הישן החלק הצפוני">הצפון הישן החלק הצפוני</option>
+<option value="הצפון הישן החלק הדרום מזרחי">הצפון הישן החלק הדרום מזרחי</option>
+<option value="פלורנטין">פלורנטין</option>
+<option value="הקריה">הקריה</option>
+<option value="הצפון החדש סביבת ככר המדינה">הצפון החדש סביבת ככר המדינה</option>
+<option value="הצפון הישן החלק הדרום מערבי">הצפון הישן החלק הדרום מערבי</option>
+<option value="הגוש הגדול">הגוש הגדול</option>
+<option value="קרית שלום">קרית שלום</option>
+<option value="לב תל אביב החלק הדרומי">לב תל אביב החלק הדרומי</option>
+<option value="כרם התימנים">כרם התימנים</option>
+<option value="שפירא">שפירא</option>
+<option value="הצפון החדש החלק הצפוני">הצפון החדש החלק הצפוני</option>
+<option value="צפון יפו">צפון יפו</option>
+<option value="נוה שאנן">נוה שאנן</option>
+<option value="רמת אביב החדשה">רמת אביב החדשה</option>
+<option value="יד אליהו">יד אליהו</option>
+<option value="כוכב הצפון">כוכב הצפון</option>
+<option value="הדר יוסף">הדר יוסף</option>
+<option value="חוף הצוק">חוף הצוק</option>
+<option value="פארק צמרת">פארק צמרת</option>
+<option value="צהלון">צהלון</option>
+<option value="התקווה">התקווה</option>
+<option value="יפו ד">יפו ד</option>
+<option value="תל חיים">תל חיים</option>
+<option value="כפיר">כפיר</option>
+<option value="ניר אביב">ניר אביב</option>
+<option value="תל ברוך צפון">תל ברוך צפון</option>
+<option value="מרכז יפו מזרחית לשדרות ירושלים">מרכז יפו מזרחית לשדרות ירושלים</option>
+<option value="רמת החייל">רמת החייל</option>
+<option value="נאות אפקה ב">נאות אפקה ב</option>
+<option value="אזורי חן">אזורי חן</option>
+<option value="הקריה">הקריה</option>
+<option value="שיכוני חיסכון">שיכוני חיסכון</option>
+<option value="אפקה">אפקה</option>
+<option value="דקר">דקר</option>
+<option value="רמת אביב">רמת אביב</option>
+<option value="יפו ג">יפו ג</option>
+<option value="רמת ישראל">רמת ישראל</option>
+<option value="רמת הטייסים">רמת הטייסים</option>
+<option value="נמל תל אביב">נמל תל אביב</option>
+<option value="צהלה">צהלה</option>
+</select>
+<div class="error-message" id="neighborhoodError">אנא בחר שכונה מתוך הרשימה.</div>
+
+      <label>סוג הנכס:</label>
+      <div class="checkbox-group">
+      <div class="error-message" id="propertyTypeError">אנא בחר סוג נכס מהרשימה.</div>
+        <label><input type="radio" name="property_type" value="דירה" required> דירה</label>
+        <label><input type="radio" name="property_type" value="גג/פנטהאוז"> גג/פנטהאוז</label>
+        <label><input type="radio" name="property_type" value="דירת גן"> דירת גן</label>
+        <label><input type="radio" name="property_type" value="מרתף/פרטר"> מרתף/פרטר</label>
+        <label><input type="radio" name="property_type" value="סטודיו/לופט"> סטודיו/לופט</label>
+        <label><input type="radio" name="property_type" value="דופלקס"> דופלקס</label>
+        <label><input type="radio" name="property_type" value="בית פרטי/קוטג'"> בית פרטי/קוטג'</label>
+        <label><input type="radio" name="property_type" value="יחידת דיור"> יחידת דיור</label>
+        <label><input type="radio" name="property_type" value="דו משפחתי"> דו משפחתי</label>
+      </div>
+
+      <label>מאפיינים:</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="AC" value="1"> מזגן</label>
+        <label><input type="checkbox" name="elevator" value="1"> מעלית</label>
+        <label><input type="checkbox" name="renovated" value="1"> משופצת</label>
+        <label><input type="checkbox" name="disabled_access" value="1"> גישה לנכים</label>
+        <label><input type="checkbox" name="furniture" value="1"> ריהוט</label>
+        <label><input type="checkbox" name="bars" value="1"> סורגים</label>
+        <label><input type="checkbox" name="balcony" value="1"> מרפסת</label>
+        <label><input type="checkbox" name="mamad" value="1"> חדר ביטחון</label>
+        <label><input type="checkbox" name="storage" value="1"> מחסן</label>
+      </div>
+
+      <label>קומה: <span id="floorValue">0</span></label>
+      <input type="range" name="floor" min="0" max="40" value="0" oninput="floorValue.innerText = this.value" required>
+
+      <label>מספר חדרים: <span id="roomNumValue">1</span></label>
+      <input type="range" name="room_num" min="1" max="5" value="1" oninput="roomNumValue.innerText = this.value" required>
+
+      <label>מרחק מכיכר דיזינגוף (1=קרוב מאוד,2=קרוב,3=בינוני, 4=רחוק): <span id="distanceValue">1</span></label>
+      <input type="range" name="distance_group" min="1" max="4" value="1" oninput="distanceValue.innerText = this.value" required>
+
+      <label>שטח דירה (מ"ר):</label>
+      <input type="number" name="area" min="1" step="1" required>
+      <div class="error-message" id="areaError">אנא הזן מספר חוקי לשטח בין 1 ל100 .</div>
+
+      <label>שטח גינה (מ"ר):</label>
+      <input type="number" name="garden_area" min="0" step="1"  required>
+      <div class="error-message" id="gardenAreaError">יש להזין ערך מספרי. במידה ולא רוצים גינה יש להזין את הספרה 0.</div>
+
+      <label>סה"כ קומות בבניין: <span id="totalFloorsValue">0</span></label>
+      <input type="range" name="total_floors" min="0" max="40" value="0" oninput="totalFloorsValue.innerText = this.value" required>
+
+   
+
+      
+<button type="submit">חשב את שכר הדירה</button>
+{% if prediction_text %}
+<div class="result">{{ prediction_text }}</div>
+{% endif %}
+    </form>
+  </div>
+
+  <script src="{{ url_for('static', filename='form-validation.js') }}"></script>
+</body>
+</html>
